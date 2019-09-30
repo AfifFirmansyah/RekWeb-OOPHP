@@ -10,40 +10,31 @@
                 $penerbit,
                 $harga ,
                 $jumlahHalaman,
-                $waktuMain,
-                $tipe;
+                $waktuMain;
+        
 // end property
 
     // Membuat konstruktor
     public function __construct( $judul = "judul", $penulis = "penulis", $penerbit = "
-        penerbit",  $harga = 0 , $jumlahHalaman = 0, $waktuMain = 0, $tipe){
+        penerbit",  $harga = 0 , $jumlahHalaman = 0, $waktuMain = 0){
         $this->judul = $judul;
         $this->penulis = $penulis;
         $this->penerbit = $penerbit;
         $this->harga = $harga;
         $this->jumlahHalaman = $jumlahHalaman;
         $this->waktuMain = $waktuMain;
-        $this->tipe= $tipe;
     }
     // end konstruktor
 
     public function getLabel(){
-        return "$this->penulis , $this->pene rbit"; 
+        return "$this->penulis , $this->penerbit"; 
     } 
 
-    public function getInfoLengkap(){
-        $str = "{$this->tipe} : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga})";
-        if($this->tipe == "Komik"){
-            $str .= " - {$this->jumlahHalaman} Halaman. "; 
-        }else if($this->tipe == "Game"){
-            $str .= " - {$this->waktuMain} Jam. "; 
-        }
-
+    public function getInfoProduk(){
+        $str = "{$this->judul} | {$this->getLabel()} (Rp. {$this->harga})";
         return $str;
     }
-
 }
-
 
 class CetakInfoProduk{
     public function cetak( Produk $produk){
@@ -52,27 +43,32 @@ class CetakInfoProduk{
     }
 }
 
-$produk1 = new Produk("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000 , 100 ,  0 , "Komik");
-$produk2 = new Produk("Uncharted", "Neil Druckman", "sony Computer", 2500000 , 0, 50 , "Game");
+// membuat kelas komik yang extends kelas produk (child class)
 
-echo "Komik : " . $produk1->getLabel();
-echo "<br>";
-echo "Game : " . $produk2->getLabel();
-echo "<br>";
+class Komik extends Produk{
+    public function getInfoProduk (){
+        $str = "Komik : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) - {$this->jumlahHalaman} Halaman.";
+        return $str;
+    }
+}
+// end
+
+// membuat kelas Game yang extends kelas produk (child class) 
+
+class Game extends Produk{
+    public function getInfoProduk (){
+        $str = "Game : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga}) ~ {$this->waktuMain} Jam.";
+        return $str;
+    }
+}
+// end
+
+
+
+$produk1 = new Komik("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000 , 100 ,  0 );
+$produk2 = new Game("Uncharted", "Neil Druckman", "sony Computer", 2500000 , 0, 50 );
  
-$infoProduk1 = new CetakInfoProduk();
-echo $infoProduk1->cetak($produk1);
-
-// Komik : asashi Kishimoto, Shonen Jump
-// Game : Neil Druckman , Sony Computer
-// Naruto | Masashi Kishimoto, Shonen Jump (Rp.30000)
-
-// menjadi
-
-// Komik : Naruto | Masashi Kishimoto, Shonen Jump (Rp. 30000) - 100 Halaman
-// Game : Uncharted | Neil Druckman, Sony Computer (Rp. 2500000) - 50 jam
+echo $produk1->getInfoProduk();
 echo "<br>";
-echo $produk1->getInfoLengkap();
-echo "<br>";
-echo $produk2->getInfoLengkap();
+echo $produk2->getInfoProduk();
 ?> 

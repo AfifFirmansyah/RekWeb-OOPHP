@@ -1,11 +1,17 @@
 <?php
+
+    interface InfoProduk{
+        public function getInfoProduk();
+    }
+
+
     // JUALAN PRODUK
     // KOMIK
     // GAME
 
     abstract class Produk{
         //property
-            private $judul, $penulis ,$penerbit, $harga ,$diskon = 0;              
+            protected $judul, $penulis ,$penerbit, $harga ,$diskon = 0;              
         // end property
 
         // Membuat konstruktor
@@ -50,7 +56,7 @@
         }
  
         public function setHarga($harga){
-            $this->harga = $harga;
+            $this->harga = $harga; 
         }
 
         public function getHarga(){
@@ -61,15 +67,9 @@
             return "$this->penulis , $this->penerbit";  
         } 
 
-        abstract public function getInfoProduk();
+        abstract public function getInfo();
         
-        public function getInfo(){
-            $str = "{$this->judul} | {$this->getLabel()} (Rp. $this->harga ) ";
-            return $str;
-        }
-
     }
-
         class CetakInfoProduk{
             public $daftarProduk = array();
 
@@ -89,7 +89,7 @@
 
         // membuat kelas komik yang extends kelas produk (child class)
 
-        class Komik extends Produk{
+        class Komik extends Produk implements InfoProduk{
         
             public $jumlahHalaman;
 
@@ -100,7 +100,12 @@
                 $this->jumlahHalaman = $jumlahHalaman;
             }
 
-            public function getInfoProduk (){
+            public function getInfo(){
+                $str = "{$this->judul} | {$this->getLabel()} (Rp. $this->harga ) ";
+                return $str;
+            }
+
+            public function getInfoProduk(){
                 $str = "Komik : " . $this->getInfo() . " - {$this->jumlahHalaman} Halaman.";
                 return $str;
             }
@@ -109,7 +114,7 @@
 
         // membuat kelas Game yang extends kelas produk (child class) 
 
-        class Game extends Produk{
+        class Game extends Produk implements InfoProduk{
             public $waktuMain;
 
             public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit",  $harga = 0 ,  $waktuMain = 0){
@@ -119,7 +124,12 @@
                 $this->waktuMain = $waktuMain;
             } 
 
-            public function getInfoProduk (){
+            public function getInfo(){
+                $str = "{$this->judul} | {$this->getLabel()} (Rp. $this->harga ) ";
+                return $str;
+            }
+    
+            public function getInfoProduk(){
                 $str = "Game : " . $this->getInfo() . " ~ {$this->waktuMain} Jam.";
                 return $str; 
             }
@@ -137,5 +147,6 @@
         $cetakProduk->tambahProduk($produk2);
         echo $cetakProduk->cetak();
         
+     
 
 ?> 

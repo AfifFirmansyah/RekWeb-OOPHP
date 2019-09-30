@@ -17,16 +17,7 @@
     }
     
     
-        // $produk1 = new Produk();
-        // // Menimpa judul yg ada dengan yg baru
-        // $produk1->judul = "Naruto";
-        // var_dump($produk1);
-
-        // $produk2 = new Produk();
-        // $produk2->judul = "Uncharted";
-        // // Menambahkan property yg belum pernah di buat
-        // $produk2->tambahProperty = "HAHAY";
-        // var_dump($produk2);
+        
 
         $produk3 = new Produk();
         $produk3->judul    = "Naruto";

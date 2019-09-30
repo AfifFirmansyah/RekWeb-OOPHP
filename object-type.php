@@ -27,13 +27,23 @@ public function getLabel(){
 
 }
 
+
+class CetakInfoProduk{
+    public function cetak( Produk $produk){
+        $str = "{$produk->judul} | {$produk->getLabel()} (RP. {$produk->harga})";
+        return $str;
+    }
+}
+
 $produk1 = new Produk("Naruto", "Masashi Kishimoto", "Shonen Jump", 30000);
 $produk2 = new Produk("Uncharted", "Neil Druckman", "sony Computer", 2500000);
-$produk3 = new Produk("Dragon Ball");
+
 echo "Komik : " . $produk1->getLabel();
 echo "<br>";
 echo "Game : " . $produk2->getLabel();
-
 echo "<br>";
-var_dump($produk3);
+ 
+$infoProduk1 = new CetakInfoProduk();
+echo $infoProduk1->cetak($produk1);
+
 ?> 

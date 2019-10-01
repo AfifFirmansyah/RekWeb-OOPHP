@@ -1,6 +1,7 @@
 <?php
-class Coba{
-    public function __construc(){
-        echo "Ini adalah kelas coba";
+class Coba {
+    public function __construct()
+    {
+        echo "ini adalah kelas Coba";
     }
 }

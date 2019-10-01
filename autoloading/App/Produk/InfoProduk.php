@@ -1,5 +1,5 @@
 <?php
 
 interface InfoProduk {
-    public function getInfoProduct();
-};
+    public function getInfoProduk();
+}

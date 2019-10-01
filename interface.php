@@ -89,24 +89,22 @@
 
         // membuat kelas komik yang extends kelas produk (child class)
 
-        class Komik extends Produk implements InfoProduk{
+        class Komik extends Produk implements InfoProduk {
+
+            public $jmlHalaman;
         
-            public $jumlahHalaman;
-
-            public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit",  $harga = 0 ,  $jumlahHalaman = 0){
-            
-                parent::__construct($judul, $penulis, $penerbit,  $harga,  $jumlahHalaman);
-            
-                $this->jumlahHalaman = $jumlahHalaman;
+            public function __construct( $judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0, $jmlHalaman = 0 ) {
+                parent::__construct( $judul, $penulis, $penerbit, $harga );
+                $this->jmlHalaman = $jmlHalaman;
+        
             }
-
-            public function getInfo(){
-                $str = "{$this->judul} | {$this->getLabel()} (Rp. $this->harga ) ";
+            public function getInfo() {
+                $str = "{$this->judul} | {$this->getLabel()} (Rp. {$this->harga})";
                 return $str;
             }
-
-            public function getInfoProduk(){
-                $str = "Komik : " . $this->getInfo() . " - {$this->jumlahHalaman} Halaman.";
+        
+            public function getInfoProduk() {
+                $str = "Komik : " . $this->getInfo() . " - {$this->jmlHalaman} Halaman.";
                 return $str;
             }
         }
